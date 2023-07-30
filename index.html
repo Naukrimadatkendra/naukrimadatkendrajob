@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Login - Jobs Management Software</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #1e3c72; /* Blue background */
+      color: #ffffff; /* White text color */
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      max-width: 350px;
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      background-color: #ffffff; /* White login form background */
+      box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      color: #1e3c72; /* Blue heading text color */
+      margin-bottom: 30px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 24px;
+    }
+
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      color: #333;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-container input[type="text"]::placeholder,
+    .login-container input[type="password"]::placeholder {
+      color: #ccc;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-container input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background-color: #1e3c72; /* Blue submit button background */
+      color: #ffffff; /* White text color */
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-container input[type="submit"]:hover {
+      background-color: #3f70bb; /* Lighter shade of blue on hover */
+    }
+
+    footer {
+      color: #1e3c72; /* Blue footer text color */
+      margin-top: 20px;
+      text-align: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-container">
+<img class="logo" src="20230220_043626-e1679460378798.png" alt="Logo">
+    <h2>Login to Jobs Management Software</h2>
+    <form id="loginForm">
+      <input type="text" name="username" placeholder="Username" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <input type="submit" value="Login">
+    </form>
+    <footer>
+      Software made by Naukri Madat Kendra Teams.
+    </footer>
+  </div>
+
+  <script>
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+
+    // Get the username and password entered by the user
+    const username = document.getElementsByName('username')[0].value;
+    const password = document.getElementsByName('password')[0].value;
+
+    // Replace these hardcoded values with the actual valid credentials from your server-side database
+    const validUsername = 'aai';
+    const validPassword = 'aai@2525';
+
+    // Check if the entered username and password match the valid credentials
+    if (username === validUsername && password === validPassword) {
+      alert('Login successful! Redirecting to the dashboard...');
+      // Replace 'your_dashboard_page.html' with the URL of the dashboard page
+      window.location.href = 'form (2).html';
+    } else {
+      alert('Invalid username or password. Please try again.');
+    }
+  });
+</script>
+  <style>
+    /* Existing styles here */
+
+    /* New style for the logo */
+    .logo {
+      display: block;
+      margin: 0 auto;
+      max-width: 300px;
+      height: auto;
+    }
+  </style>
+
+</body>
+
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Jobs Management Software</title>
+  <style>
+    /* Your CSS styles here */
+    /* ... (unchanged CSS styles) ... */
+  </style>
+</head>
+
+<body>
+<div class="container">
+  <img src="20230220_043626-e1679460378798.png" alt="Logo" class="logo">
+  <h2>Jobs Management Software</h2>
+  <!-- ... (rest of the content) ... -->
+</div>
+
+    <form id="jobsForm">
+      <!-- (unchanged form fields) -->
+    </form>
+
+    <div id="successMessage" class="success-notification">
+      Successfully submitted!
+    </div>
+
+    <table id="jobsTable">
+      <tr>
+        <th>Title</th>
+        <th>Apply Link</th>
+        <th>Poster Download Link</th>
+        <th>Notification Link</th>
+        <th>Last Date</th>
+        <th>Actions</th>
+      </tr>
+    </table>
+  </div>
+
+  <footer>
+    Software made by Naukri Madat Kendra Teams.
+  </footer>
+
+  <script>
+    const form = document.getElementById("jobsForm");
+    const successMessage = document.getElementById("successMessage");
+    const jobsTable = document.getElementById("jobsTable");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      // ... (unchanged form submission logic) ...
+      // ... (unchanged Local Storage logic) ...
+
+      // Update the table with the submitted form data
+      updateTable();
+    });
+
+    function updateTable() {
+      // Clear the current table entries
+      jobsTable.innerHTML = `
+        <tr>
+          <th>Title</th>
+          <th>Apply Link</th>
+          <th>Poster Download Link</th>
+          <th>Notification Link</th>
+          <th>Last Date</th>
+          <th>Actions</th>
+        </tr>
+      `;
+
+      // Retrieve the form data from Local Storage
+      const formDataArrayString = localStorage.getItem("submittedFormDataArray");
+      const formDataArray = formDataArrayString ? JSON.parse(formDataArrayString) : [];
+
+      // Populate the table with the form data
+      formDataArray.forEach((formDataObject, index) => {
+        const {
+          title,
+          applyLink,
+          posterDownloadLink,
+          notificationLink,
+          lastDate
+        } = formDataObject;
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${title}</td>
+          <td>${applyLink}</td>
+          <td>${posterDownloadLink}</td>
+          <td>${notificationLink}</td>
+          <td>${lastDate}</td>
+          <td>
+            <button onclick="editEntry(${index})">Edit</button>
+            <button onclick="deleteEntry(${index})">Delete</button>
+          </td>
+        `;
+        jobsTable.appendChild(row);
+      });
+    }
+
+    function editEntry(index) {
+      // Retrieve the form data from Local Storage
+      const formDataArrayString = localStorage.getItem("submittedFormDataArray");
+      const formDataArray = formDataArrayString ? JSON.parse(formDataArrayString) : [];
+
+      // Populate the form fields with the selected entry data
+      const selectedEntry = formDataArray[index];
+      form.title.value = selectedEntry.title;
+      form.applyLink.value = selectedEntry.applyLink;
+      form.posterDownloadLink.value = selectedEntry.posterDownloadLink;
+      form.notificationLink.value = selectedEntry.notificationLink;
+      form.lastDate.value = selectedEntry.lastDate;
+
+      // Remove the selected entry from the form data array
+      formDataArray.splice(index, 1);
+
+      // Update Local Storage with the edited form data array
+      localStorage.setItem("submittedFormDataArray", JSON.stringify(formDataArray));
+
+      // Update the table with the edited form data
+      updateTable();
+    }
+
+    function deleteEntry(index) {
+      // Retrieve the form data from Local Storage
+      const formDataArrayString = localStorage.getItem("submittedFormDataArray");
+      const formDataArray = formDataArrayString ? JSON.parse(formDataArrayString) : [];
+
+      // Remove the selected entry from the form data array
+      formDataArray.splice(index, 1);
+
+      // Update Local Storage with the updated form data array
+      localStorage.setItem("submittedFormDataArray", JSON.stringify(formDataArray));
+
+      // Update the table without the deleted entry
+      updateTable();
+    }
+
+    // Initialize the table when the page loads
+    updateTable();
+  </script>
+<style>.success-notification {
+  display: none;
+  padding: 10px;
+  background-color: #5cb85c;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+/* Styling for action buttons in the table */
+table button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: background-color 0.3s;
+}
+table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-align: center;
+}
+table tr {
+  border-bottom: 1px solid #ddd;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 14px;
+}
+/* CSS style for the title */
+
+h2 {
+  color: #007bff;
+  font-size: 32px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+}
+/* CSS style to center the table */
+
+table {
+  margin: 0 auto; /* Horizontal centering */
+}
+/* CSS style for the logo and title */
+
+.logo {
+  display: block;
+  max-width: 400px; /* Adjust the width according to your logo size */
+  margin: 0 auto;
+}
+
+h2 {
+  color: #007bff;
+  font-size: 32px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+}
+
+</style>
+</body>
+
+</html>

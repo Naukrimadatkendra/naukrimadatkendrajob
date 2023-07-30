@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Latest Job Notifications</title>
+
+</head>
+
+<body>
+  <div class="container">
+    <h2>Latest Job Notifications</h2>
+    <input type="text" id="searchInput" placeholder="Search...">
+    <table id="dataTable">
+      <tr>
+        <th class="title">Title</th>
+        <th>Apply Link</th>
+        <th>Poster Download</th>
+        <th>Notification Link</th>
+        <th>Last Date</th>
+      </tr>
+    </table><style>
+.success-notification {
+  display: none;
+  padding: 10px;
+  background-color: #5cb85c;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for action buttons in the table */
+table button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: background-color 0.3s;
+}
+
+table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-align: center;
+}
+
+table tr {
+  border-bottom: 1px solid #ddd;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* CSS style for the title */
+h2 {
+  color: #007bff;
+  font-size: 32px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+}
+
+/* CSS style to center the table */
+table {
+  width: 100%; /* Take full width of the container */
+  margin: 0 auto; /* Horizontal centering */
+}
+
+/* CSS style for the logo and title */
+.logo {
+  display: block;
+  max-width: 200px; /* Adjust the width according to your logo size */
+  margin: 0 auto;
+}
+</style>
+<style>
+  /* CSS style for the title */
+  h2 {
+    color: #007bff;
+    font-size: 36px; /* Increased font size to 36px */
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+  }
+
+  /* CSS style for the links */
+  a {
+    text-decoration: none; /* Remove underline */
+    color: #007bff; /* Set link color to blue */
+  }
+
+  /* CSS style for the links on hover */
+  a:hover {
+    text-decoration: underline; /* Add underline on hover */
+  }
+</style>
+<style>
+  /* Existing styles ... */
+
+  /* CSS style for the "Title" column */
+  th.title {
+    width: 40%; /* Increase the width of the "Title" column (adjust the value as needed) */
+    text-align: center; /* Center the text in the "Title" column */
+  }
+
+  /* CSS style for the table data cells */
+  td {
+    text-align: center; /* Center the content in all data cells */
+  }
+
+  /* Existing styles ... */
+</style>
+<style>
+
+<style>
+  /* Existing styles ... */
+
+  /* CSS style for the table */
+  table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse; /* Combine borders for a cleaner look */
+  }
+
+  /* CSS style for the header cells */
+  th {
+    background-color: #f2f2f2; /* Light gray background */
+    border: 1px solid #ddd; /* Light gray border */
+    font-weight: bold;
+    text-align: center;
+    padding: 8px;
+  }
+
+  /* CSS style for the data cells */
+  td {
+    border: 1px solid #ddd; /* Light gray border */
+    text-align: center;
+    padding: 8px;
+  }
+
+  /* Existing styles ... */
+</style>
+<style>
+  /* CSS style for the table */
+  table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+  }
+
+  /* CSS style for the header cells */
+  th {
+    background-color: #f2f2f2; /* Light gray background color for header cells */
+    color: #000; /* Dark text color for header cells */
+    font-weight: bold;
+    text-align: center;
+    padding: 12px;
+    border: 2px solid #fff; /* White border */
+  }
+
+  /* CSS style for alternating data rows */
+  tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light gray background for even rows */
+  }
+
+  /* CSS style for odd data rows */
+  tr:nth-child(odd) {
+    background-color: #e1f2ff; /* Light blue background for odd rows */
+  }
+
+  /* CSS style for the data cells */
+  td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+
+  /* Existing styles ... */
+</style>
+
+  </div>
+
+  <footer>
+    Software made by Naukri Madat Kendra Teams.
+  </footer>
+
+  <script>
+    // Retrieve all the submitted form data from Local Storage and display in the table
+    const formDataArrayString = localStorage.getItem("submittedFormDataArray");
+    if (formDataArrayString) {
+      const formDataArray = JSON.parse(formDataArrayString);
+      const dataTable = document.getElementById("dataTable");
+
+      // Reverse the array to show latest posts at the top
+      formDataArray.reverse();
+
+      formDataArray.forEach((formData) => {
+        const newRow = document.createElement("tr");
+        newRow.innerHTML = `
+          <td>${formData.title}</td>
+          <td><a href="${formData.applyLink}" target="_blank">Apply Link</a></td>
+          <td><a href="${formData.posterDownloadLink}" target="_blank">Download Poster</a></td>
+          <td><a href="${formData.notificationLink}" target="_blank">Notification Link</a></td>
+          <td>${formData.lastDate}</td>
+        `;
+        dataTable.appendChild(newRow);
+      });
+
+      // Search functionality
+      const searchInput = document.getElementById("searchInput");
+      searchInput.addEventListener("input", () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const rows = dataTable.getElementsByTagName("tr");
+
+        for (let i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
+          const row = rows[i];
+          const rowData = row.textContent.toLowerCase();
+
+          if (rowData.includes(searchTerm)) {
+            row.style.display = ""; // Show the row if it matches the search term
+          } else {
+            row.style.display = "none"; // Hide the row if it doesn't match the search term
+          }
+        }
+      });
+    } else {
+      // If no form data is found in Local Storage, show a message
+      const noDataMessage = document.createElement("p");
+      noDataMessage.textContent = "No data submitted yet.";
+      document.body.appendChild(noDataMessage);
+    }
+  </script><!DOCTYPE html>
+<html>
+
+<head>
+  <title>Latest Job Notifications</title>
+  <!-- Add the link to the Mukta font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200&display=swap" rel="stylesheet">
+
+  <style>
+    /* Existing styles ... */
+
+    /* Use the Mukta font for the table content */
+    table {
+      font-family: 'Mukta', sans-serif;
+    }
+
+    /* CSS style for the table rows (reduce height) */
+    table tr {
+      height: 25px; /* Adjust the height as needed */
+    }
+
+    /* CSS style for the header cells */
+    th {
+      /* Set the title color to a desired color */
+      color: blue; /* Change "blue" to any color you want */
+      /* Existing styles ... */
+    }
+
+    /* CSS style for alternating data rows */
+    tr:nth-child(even) {
+      /* Existing styles ... */
+    }
+
+    /* CSS style for odd data rows */
+    tr:nth-child(odd) {
+      /* Existing styles ... */
+    }
+
+    /* CSS style for the data cells */
+    td {
+      /* Existing styles ... */
+    }
+
+    /* Existing styles ... */
+  </style>
+</head>
+
+<body>
+  <!-- Existing content ... -->
+</body>
+
+</html>
+
+</body>
+
+</html>
